@@ -100,7 +100,8 @@ class Flashcards {
     //----para console somente:
     let kanji = this.sorteadosArr[this.random][0];
     let level = this.sorteadosArr[this.random][1];
-    console.table({ kanji, level });
+    let significado = this.sorteadosArr[this.random][2];
+    console.table({ kanji, level, significado });
   }
   //renderiza Deck no HTML
   renderDeck() {
@@ -128,14 +129,14 @@ class Flashcards {
       */
       //console.log(cartao, '<-- cartao a ser escutado');
       cartao.addEventListener('click', (event) => {
-        console.log('clicou!!!!!!!!!');
+        //console.log('clicou!!!!!!!!!');
         //
         let target = event.currentTarget;
         console.log(target, '<-target');
         console.log(target.getAttribute('resposta'), '<-target');
         if (target.getAttribute('resposta') === 'correto') {
           this.acertos++;
-          this.rodadas++;
+
           console.log(
             this.acertos,
             '<< acertos',
@@ -144,7 +145,7 @@ class Flashcards {
           );
         } else {
           this.erros++;
-          this.rodadas++;
+
           console.log(
             this.erros,
             '<< erros',
@@ -152,6 +153,7 @@ class Flashcards {
             '<--round'
           );
         }
+        this.informacoes1();
         //console.table({this.erros, this.acertos, this.rodadas});
       });
     });
@@ -160,9 +162,16 @@ class Flashcards {
     //
   }
   // --- metodo - atualiza informações básicas nivel escolhido
+  //campos de dados - painel para acompanhar
   informacoes1() {
-    let infor = document.getElementsByName('information1');
-    infomr;
+    let infor = document.getElementsByClassName('information1');
+    console.log(infor, '<=infor');
+    let quadroInformacoes = `<div>Nível atual: ${this.optionLevel} / contém ${
+      this.levelArr.length
+    } ideogramas</div>
+    <div>Rodada ${this.acertos + this.erros} de ${this.rodadas} </div>
+     <div>Acertos: ${this.acertos} / Erros: ${this.erros}</div>`;
+    infor[0].innerHTML = quadroInformacoes;
   }
 }
 //
@@ -178,6 +187,8 @@ let inicializa = function () {
   flascardsGame.randomDeck();
   flascardsGame.renderMainCard();
   flascardsGame.renderDeck();
+  // informações - teste
+  flascardsGame.informacoes1();
 };
 
 // botão incializa
@@ -204,7 +215,13 @@ proximo.addEventListener('click', () => {
 
 //******************************* */
 //******************************* */
-// botão reseta//
-//campos de dados
+
+// botão reset//
+// limitar qt de rodadas
+// vitória/derrota
+// refatorar - event listener - bootstraps
+// slides/prize
+// tempo
+
 //******************************* */
 //******************************* */
