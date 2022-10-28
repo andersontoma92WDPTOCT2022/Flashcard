@@ -1,0 +1,39 @@
+#deck {
+  display: flex;
+  border-width: 2px;
+  gap: 10px;
+  width: 80%;
+  padding: 0 10%;
+}
+
+#deck > article {
+  font-size: 0.8rem;
+  text-align: center;
+  display: flex;
+  width: 20%;
+  height: 5rem;
+  border-width: 2px;
+  background-color: rgb(147, 120, 172);
+  border-color: blue;
+  flex-direction: column;
+  justify-content: space-evenly;
+  padding: 5px 5px;
+  border-radius: 10px;
+}
+
+#main-card {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 4rem;
+  color: blue;
+  text-align: center;
+}
+section {
+  border-radius: 50px;
+  background: #e0e0e0;
+  box-shadow: -20px -20px 60px #707070, 20px 20px 60px #ffffff;
+  padding-bottom: 40px;
+}
+
+footer {
+  margin: 20px 10px;
+}

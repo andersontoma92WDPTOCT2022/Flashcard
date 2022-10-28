@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@600&display=swap"
+      rel="stylesheet"
+    />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="styles\styles.css" />
+  </head>
+  <body>
+    <!--  Level do game/kanji  -->
+    <div>
+      <select id="level" onChange="flascardsGame.updateLevel()">
+        <option value="1">Level 1</option>
+        <option value="2">Level 2</option>
+        <option value="3">Level 3</option>
+        <option value="4">Level 4</option>
+        <option value="5">Level 5</option>
+        <option value="6">Level 6</option>
+      </select>
+    </div>
+    <!--  quantidade de rodadas  -->
+    <div>
+      <select id="numRodadas" onChange="flascardsGame.updateRodadas()">
+        <option value="10">10 rodadas</option>
+        <option value="15">15 rodadas</option>
+        <option value="20">20 rodadas</option>
+      </select>
+    </div>
+    <!--  botão tart  -->
+    <button id="startBtn">Start</button>
+
+    <!--  flashcards  -->
+    <section>
+      <!-- main Card -->
+      <div id="main-card">flash cards</div>
+      <!-- deck (n cards) -->
+      <div id="deck"></div>
+    </section>
+
+    <footer>
+      <button id="proximoBtn">próximo set</button>
+      <div class="information1"></div>
+    </footer>
+    <!--scripts-->
+    <script src="js\flascards.js"></script>
+    <script src="js\index.js"></script>
+  </body>
+</html>
