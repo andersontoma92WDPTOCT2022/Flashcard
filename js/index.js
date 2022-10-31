@@ -216,12 +216,13 @@ proximo.addEventListener('click', () => {
 //******************************* */
 //******************************* */
 
-// botão reset//
 // limitar qt de rodadas
 // vitória/derrota
+// botão reset//
 // refatorar - event listener - bootstraps
-// slides/prize
+
 // tempo
+// slides/prize
 
 //******************************* */
 //******************************* */
