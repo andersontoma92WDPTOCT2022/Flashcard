@@ -90,15 +90,15 @@ class RenderHTML {
     });
   }
   renderPainel() {
-    let infor = this.section.querySelector('#painel');
     let { optionLevel, levelArr, acertos, erros, rodadas, vidas } = this.game;
-
-    let quadroInformacoes = `<div>Nível atual: ${optionLevel} / contém ${
-      levelArr.length
-    } ideogramas</div>
-      <div>Rodada ${acertos + erros + 1} de ${rodadas} </div>
-       <div>Acertos: ${acertos} / Erros: ${erros} / vidas ${vidas}</div>`;
-    infor.innerHTML = quadroInformacoes;
+    //
+    document.getElementById('optionLevel').textContent = optionLevel;
+    document.getElementById('numIdeogramas').textContent = levelArr.length;
+    document.getElementById('rodada').textContent = acertos + erros + 1;
+    document.getElementById('rodadas').textContent = rodadas;
+    document.getElementById('acertos').textContent = acertos;
+    document.getElementById('vidas').textContent = '❤'.repeat(vidas);
+    //
   }
   renderNext() {
     console.log(this.game.acertos + this.game.erros + 1 < this.game.rodadas);

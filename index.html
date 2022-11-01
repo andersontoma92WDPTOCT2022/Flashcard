@@ -11,38 +11,55 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
+      crossorigin="anonymous"
+    />
     <link rel="stylesheet" href="styles\styles.css" />
   </head>
   <body>
-    <!--  Level do game/kanji  -->
-    <div>
-      <select id="level">
-        <option value="1">Level 1</option>
-        <option value="2">Level 2</option>
-        <option value="3">Level 3</option>
-        <option value="4">Level 4</option>
-        <option value="5">Level 5</option>
-        <option value="6">Level 6</option>
-      </select>
-    </div>
-    <!--  quantidade de rodadas  -->
-    <div>
-      <select id="numRodadas">
-        <option value="10">10 rodadas</option>
-        <option value="15">15 rodadas</option>
-        <option value="20">20 rodadas</option>
-      </select>
-    </div>
-    <!--  botão tart  -->
-    <button id="startBtn">Start</button>
+    <nav id="navId" class="navbar">
+      <!--  Level do game/kanji  -->
+      <div>
+        <select id="level">
+          <option value="1">Level 1</option>
+          <option value="2">Level 2</option>
+          <option value="3">Level 3</option>
+          <option value="4">Level 4</option>
+          <option value="5">Level 5</option>
+          <option value="6">Level 6</option>
+        </select>
+      </div>
+      <!--  quantidade de rodadas  -->
+      <div>
+        <select id="numRodadas">
+          <option value="10">10 rodadas</option>
+          <option value="15">15 rodadas</option>
+          <option value="20">20 rodadas</option>
+        </select>
+      </div>
+      <!--  botão tart  -->
+      <button id="startBtn">Start</button>
+    </nav>
+    <nav id="painel" class="navbar d-none">
+      <h2>
+        Nível atual: <span id="optionLevel"></span> / contém
+        <span id="numIdeogramas"></span> ideogramas
+      </h2>
+      <h2>Rodada: <span id="rodada"></span> de <span id="rodadas"></span></h2>
+      <h2>
+        Acertos: <span id="acertos"></span> Vidas: <span id="vidas"></span>
+      </h2>
+    </nav>
 
     <!--  flashcards  -->
-    <section id="flashcards">
+    <section id="flashcards" class="visually-hidden">
       <!-- main Card -->
       <div id="main-card">flash cards</div>
       <!-- deck (n cards) -->
       <div id="deck"></div>
-      <div id="painel"></div>
     </section>
 
     <!--
