@@ -114,11 +114,12 @@ class RenderHTML {
     } else {
       //<------------resultado final---------
       this.clearButton();
-      document.getElementById('resultado').textContent = `fim, vc ${
+      document.getElementById('resultado').textContent = `vc ${
         this.game.vidas - this.game.erros === 0
           ? 'perdeu, estude mais'
           : 'venceu!'
       }`;
+      new bootstrap.Modal(document.getElementById('staticBackdrop')).show();
     }
   }
 }

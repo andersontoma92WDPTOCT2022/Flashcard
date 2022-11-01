@@ -9,6 +9,8 @@ const painel = document.getElementById('painel');
 const game = new FlashCard();
 const render = new RenderHTML(game, flashcards);
 
+const reinicio = document.getElementById('reinicio');
+
 // botão incializa
 incia.addEventListener('click', () => {
   render.init();
@@ -17,6 +19,12 @@ incia.addEventListener('click', () => {
   painel.classList.toggle('d-none', false);
 });
 
+reinicio.addEventListener('click', () => {
+  //
+  flashcards.classList.toggle('visually-hidden');
+  navBar.classList.toggle('d-none');
+  painel.classList.toggle('d-none');
+});
 // proximo set - botão
 
 render.botoesSeletores();

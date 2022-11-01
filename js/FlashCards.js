@@ -1,8 +1,8 @@
-import jouYou from "../assets/kanji_compilado.json" assert { type: "json" };
+import jouYou from '../assets/kanji_compilado.json' assert { type: 'json' };
 
 export default class FlashCard {
   constructor() {
-    this.optionLevel = "1";
+    this.optionLevel = '1';
     this.rodadas = 10;
     this.numCardsPorSet = 5; //5 kanjis de cada vez. evitar Mock
     this.erros = 0;
@@ -44,6 +44,7 @@ export default class FlashCard {
     this.mainCard = sorteados[random];
 
     this.sorteadosArr = sorteados;
+    //console.log(sorteados);
   }
   resetFlashcards() {
     this.erros = 0;
