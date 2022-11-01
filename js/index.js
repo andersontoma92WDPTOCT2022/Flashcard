@@ -1,32 +1,56 @@
-import FlashCard from './FlashCards.js';
-import RenderHTML from './RenderHTML.js';
+import FlashCard from "./FlashCards.js";
+import RenderHTML from "./RenderHTML.js";
 
-let incia = document.getElementById('startBtn');
-const flashcards = document.getElementById('flashcards');
-const navBar = document.getElementById('navId');
-const painel = document.getElementById('painel');
+let incia = document.getElementById("startBtn");
+const flashcards = document.getElementById("flashcards");
+const navBar = document.getElementById("navId");
+const painel = document.getElementById("painel");
+const speaker = document.getElementById("speaker");
+const formulario = document.getElementById("valores");
 
 const game = new FlashCard();
 const render = new RenderHTML(game, flashcards);
 
-const reinicio = document.getElementById('reinicio');
+const reinicio = document.getElementById("reinicio");
 
 // botão incializa
-incia.addEventListener('click', () => {
+/*
+incia.addEventListener("click", () => {
   render.init();
-  flashcards.classList.toggle('visually-hidden', false);
-  navBar.classList.toggle('d-none', true);
-  painel.classList.toggle('d-none', false);
-});
 
-reinicio.addEventListener('click', () => {
+});
+*/
+
+reinicio.addEventListener("click", () => {
   //
-  flashcards.classList.toggle('visually-hidden');
-  navBar.classList.toggle('d-none');
-  painel.classList.toggle('d-none');
+  flashcards.classList.toggle("d-none");
+  navBar.classList.toggle("d-none");
+  painel.classList.toggle("d-none");
 });
 // proximo set - botão
 
-render.botoesSeletores();
+speaker.addEventListener("click", (event) => {
+  let kanji = event.target.previousElementSibling.textContent;
+  const utter = new SpeechSynthesisUtterance(kanji);
+  utter.lang = "ja-JP";
+  speechSynthesis.speak(utter);
+});
+
+formulario.addEventListener("submit", (event) => {
+  event.preventDefault();
+  event.stopImmediatePropagation();
+
+  const data = Object.fromEntries(new FormData(formulario).entries());
+  game.setRodadas(Number(data.rodadas));
+  game.setLevel(data.level);
+
+  render.init();
+
+  flashcards.classList.toggle("d-none", false);
+  navBar.classList.toggle("d-none", true);
+  painel.classList.toggle("d-none", false);
+});
+
+// render.botoesSeletores();
 
 //

@@ -12,45 +12,26 @@ class RenderHTML {
     this.renderPainel();
   }
   renderButtons() {
-    let inner = '';
+    let inner = "";
     for (let i = 0; i < this.game.numCardsPorSet; i++) {
-      inner += '<button></button>';
+      inner += "<button></button>";
     }
-    this.section.querySelector('#deck').innerHTML = inner;
+    this.section.querySelector("#deck").innerHTML = inner;
   }
 
   clearButton() {
-    let btns = this.section.querySelectorAll('#deck button');
+    let btns = this.section.querySelectorAll("#deck button");
     btns.forEach((btn, index) => {
-      btn.removeEventListener('click', this.listeners[index]);
+      btn.removeEventListener("click", this.listeners[index]);
     });
     this.listeners = [];
   }
 
-  botoesSeletores() {
-    //inicializar no index.js
-    let btnRodadas = document.getElementById('numRodadas');
-    btnRodadas.addEventListener('change', () => {
-      let optRodadas = btnRodadas.options[btnRodadas.selectedIndex].value;
-      this.game.rodadas = optRodadas;
-      this.game.vidas = optRodadas / 5;
-    });
-
-    let btnLevel = document.getElementById('level');
-    btnLevel.addEventListener('change', () => {
-      let optLevel = btnLevel.options[btnLevel.selectedIndex].value;
-      this.game.optionLevel = optLevel;
-      //incluido na classe Flascard!!!!!!!!!!!
-      this.game.atualizaLevelArray();
-    });
-  }
-
   renderDeck() {
     // Mostra o Ideograma
-    this.section.querySelector('#main-card').textContent =
-      this.game.mainCard.kanji;
+    this.section.querySelector("#kanji").textContent = this.game.mainCard.kanji;
 
-    let btns = this.section.querySelectorAll('#deck button');
+    let btns = this.section.querySelectorAll("#deck button");
 
     this.clearButton();
 
@@ -59,13 +40,13 @@ class RenderHTML {
     this.game.sorteadosArr.forEach((card, index) => {
       let cartao = btns[index];
 
-      let meaningSpan = '';
+      let meaningSpan = "";
 
       card.meanings.forEach(
         (meaning) => (meaningSpan += `<span class="meaning">${meaning}</span>`)
       );
 
-      let readingSpan = '';
+      let readingSpan = "";
       card.readings_kun.forEach(
         (reading) => (readingSpan += `<span class="reading">${reading}</span>`)
       );
@@ -85,22 +66,22 @@ class RenderHTML {
 
       this.listeners.push(listener);
 
-      cartao.addEventListener('click', listener);
+      cartao.addEventListener("click", listener);
     });
   }
   renderPainel() {
     let { optionLevel, levelArr, acertos, erros, rodadas, vidas } = this.game;
     //
-    document.getElementById('optionLevel').textContent = optionLevel;
-    document.getElementById('numIdeogramas').textContent = levelArr.length;
-    document.getElementById('rodada').textContent = Math.min(
+    document.getElementById("optionLevel").textContent = optionLevel;
+    document.getElementById("numIdeogramas").textContent = levelArr.length;
+    document.getElementById("rodada").textContent = Math.min(
       acertos + erros + 1,
       rodadas
     );
-    document.getElementById('rodadas').textContent = rodadas;
-    document.getElementById('acertos').textContent = acertos;
-    document.getElementById('vidas').textContent =
-      '❤'.repeat(vidas - erros) + '🖤'.repeat(erros);
+    document.getElementById("rodadas").textContent = rodadas;
+    document.getElementById("acertos").textContent = acertos;
+    document.getElementById("vidas").textContent =
+      "❤".repeat(vidas - erros) + "🖤".repeat(erros);
     //
   }
   renderNext() {
@@ -114,12 +95,12 @@ class RenderHTML {
     } else {
       //<------------resultado final---------
       this.clearButton();
-      document.getElementById('resultado').textContent = `vc ${
+      document.getElementById("resultado").textContent = `vc ${
         this.game.vidas - this.game.erros === 0
-          ? 'perdeu, estude mais'
-          : 'venceu!'
+          ? "perdeu, estude mais"
+          : "venceu!"
       }`;
-      new bootstrap.Modal(document.getElementById('staticBackdrop')).show();
+      new bootstrap.Modal(document.getElementById("staticBackdrop")).show();
     }
   }
 }
