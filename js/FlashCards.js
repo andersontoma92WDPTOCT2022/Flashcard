@@ -1,8 +1,8 @@
-import jouYou from '../assets/kanji_compilado.json' assert { type: 'json' };
+import jouYou from "../assets/kanji_compilado.json" assert { type: "json" };
 
 export default class FlashCard {
   constructor() {
-    this.optionLevel = '1';
+    this.optionLevel = "1";
     this.rodadas = 10;
     this.numCardsPorSet = 5; //5 kanjis de cada vez. evitar Mock
     this.erros = 0;
@@ -23,11 +23,15 @@ export default class FlashCard {
   randomDeck() {
     // conjunto de 5 kanji's aleatorios de 1 rodada
     let sorteados = [];
+
     while (sorteados.length < this.numCardsPorSet) {
       let numSorteado = this.getRandom(this.levelArr.length);
       let card = this.levelArr[numSorteado];
 
-      if (!sorteados.includes(card) && card.readings_kun.length !== 0) {
+      if (
+        !sorteados.some(({ kanji }) => kanji === card.kanji) &&
+        card.readings_kun.length !== 0
+      ) {
         let copy = { ...card };
         copy.meanings = copy.meanings.slice(0, 3);
         copy.readings_kun = copy.readings_kun.slice(0, 3);

@@ -12,32 +12,32 @@ class RenderHTML {
     this.renderPainel();
   }
   renderButtons() {
-    let inner = '';
+    let inner = "";
     for (let i = 0; i < this.game.numCardsPorSet; i++) {
-      inner += '<button></button>';
+      inner += "<button></button>";
     }
-    this.section.querySelector('#deck').innerHTML = inner;
+    this.section.querySelector("#deck").innerHTML = inner;
   }
 
   clearButton() {
-    let btns = this.section.querySelectorAll('#deck button');
+    let btns = this.section.querySelectorAll("#deck button");
     btns.forEach((btn, index) => {
-      btn.removeEventListener('click', this.listeners[index]);
+      btn.removeEventListener("click", this.listeners[index]);
     });
     this.listeners = [];
   }
 
   botoesSeletores() {
     //inicializar no index.js
-    let btnRodadas = document.getElementById('numRodadas');
-    btnRodadas.addEventListener('change', () => {
+    let btnRodadas = document.getElementById("numRodadas");
+    btnRodadas.addEventListener("change", () => {
       let optRodadas = btnRodadas.options[btnRodadas.selectedIndex].value;
       this.game.rodadas = optRodadas;
       this.game.vidas = optRodadas / 5;
     });
 
-    let btnLevel = document.getElementById('level');
-    btnLevel.addEventListener('change', () => {
+    let btnLevel = document.getElementById("level");
+    btnLevel.addEventListener("change", () => {
       let optLevel = btnLevel.options[btnLevel.selectedIndex].value;
       this.game.optionLevel = optLevel;
       //incluido na classe Flascard!!!!!!!!!!!
@@ -47,10 +47,10 @@ class RenderHTML {
 
   renderDeck() {
     // Mostra o Ideograma
-    this.section.querySelector('#main-card').textContent =
+    this.section.querySelector("#main-card").textContent =
       this.game.mainCard.kanji;
 
-    let btns = this.section.querySelectorAll('#deck button');
+    let btns = this.section.querySelectorAll("#deck button");
 
     this.clearButton();
 
@@ -59,13 +59,13 @@ class RenderHTML {
     this.game.sorteadosArr.forEach((card, index) => {
       let cartao = btns[index];
 
-      let meaningSpan = '';
+      let meaningSpan = "";
 
       card.meanings.forEach(
         (meaning) => (meaningSpan += `<span class="meaning">${meaning}</span>`)
       );
 
-      let readingSpan = '';
+      let readingSpan = "";
       card.readings_kun.forEach(
         (reading) => (readingSpan += `<span class="reading">${reading}</span>`)
       );
@@ -77,7 +77,6 @@ class RenderHTML {
           this.game.acertos++;
         } else {
           this.game.erros++;
-          this.game.vidas--;
         }
         this.renderPainel();
         // INSERIR PAUSA PARA MOSTRAR SE ACERTOU OU ERROU
@@ -86,25 +85,29 @@ class RenderHTML {
 
       this.listeners.push(listener);
 
-      cartao.addEventListener('click', listener);
+      cartao.addEventListener("click", listener);
     });
   }
   renderPainel() {
     let { optionLevel, levelArr, acertos, erros, rodadas, vidas } = this.game;
     //
-    document.getElementById('optionLevel').textContent = optionLevel;
-    document.getElementById('numIdeogramas').textContent = levelArr.length;
-    document.getElementById('rodada').textContent = acertos + erros + 1;
-    document.getElementById('rodadas').textContent = rodadas;
-    document.getElementById('acertos').textContent = acertos;
-    document.getElementById('vidas').textContent = '❤'.repeat(vidas);
+    document.getElementById("optionLevel").textContent = optionLevel;
+    document.getElementById("numIdeogramas").textContent = levelArr.length;
+    document.getElementById("rodada").textContent = Math.min(
+      acertos + erros + 1,
+      rodadas
+    );
+    document.getElementById("rodadas").textContent = rodadas;
+    document.getElementById("acertos").textContent = acertos;
+    document.getElementById("vidas").textContent =
+      "❤".repeat(vidas - erros) + "🖤".repeat(erros);
     //
   }
   renderNext() {
     console.log(this.game.acertos + this.game.erros + 1 < this.game.rodadas);
     if (
       this.game.acertos + this.game.erros < this.game.rodadas &&
-      this.game.vidas > 0
+      this.game.erros < this.game.vidas
     ) {
       this.game.randomDeck();
       this.renderDeck();

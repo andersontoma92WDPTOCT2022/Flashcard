@@ -1,3 +1,8 @@
+/* body {
+  background: url("../assets/Mt.\ Fuji.jpg");
+  object-fit: scale-down;
+} */
+
 #deck {
   display: flex;
   border-width: 2px;
@@ -22,7 +27,7 @@
 }
 
 #main-card {
-  font-family: 'Noto Serif JP', serif;
+  font-family: "Noto Serif JP", serif;
   font-size: 4rem;
   color: blue;
   text-align: center;
