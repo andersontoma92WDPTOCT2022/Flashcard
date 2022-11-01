@@ -5,6 +5,7 @@ class RenderHTML {
     this.listeners = [];
   }
   init() {
+    this.game.resetFlashcards();
     this.game.randomDeck();
     this.renderButtons();
     this.renderDeck();
@@ -24,6 +25,24 @@ class RenderHTML {
       btn.removeEventListener('click', this.listeners[index]);
     });
     this.listeners = [];
+  }
+
+  botoesSeletores() {
+    //inicializar no index.js
+    let btnRodadas = document.getElementById('numRodadas');
+    btnRodadas.addEventListener('change', () => {
+      let optRodadas = btnRodadas.options[btnRodadas.selectedIndex].value;
+      this.game.rodadas = optRodadas;
+      this.game.vidas = optRodadas / 5;
+    });
+
+    let btnLevel = document.getElementById('level');
+    btnLevel.addEventListener('change', () => {
+      let optLevel = btnLevel.options[btnLevel.selectedIndex].value;
+      this.game.optionLevel = optLevel;
+      //incluido na classe Flascard!!!!!!!!!!!
+      this.game.atualizaLevelArray();
+    });
   }
 
   renderDeck() {
@@ -46,7 +65,12 @@ class RenderHTML {
         (meaning) => (meaningSpan += `<span class="meaning">${meaning}</span>`)
       );
 
-      cartao.innerHTML = `<div>${meaningSpan}</div><div>${card.readings_kun}</div>`;
+      let readingSpan = '';
+      card.readings_kun.forEach(
+        (reading) => (readingSpan += `<span class="reading">${reading}</span>`)
+      );
+
+      cartao.innerHTML = `<div>${meaningSpan}</div><div>${readingSpan}</div>`;
 
       let listener = () => {
         if (card === this.game.mainCard) {
@@ -78,7 +102,10 @@ class RenderHTML {
   }
   renderNext() {
     console.log(this.game.acertos + this.game.erros + 1 < this.game.rodadas);
-    if (this.game.acertos + this.game.erros + 1 < this.game.rodadas) {
+    if (
+      this.game.acertos + this.game.erros < this.game.rodadas &&
+      this.game.vidas > 0
+    ) {
       this.game.randomDeck();
       this.renderDeck();
     } else this.clearButton();

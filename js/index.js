@@ -11,3 +11,5 @@ incia.addEventListener('click', () => {
 });
 
 // proximo set - botão
+
+render.botoesSeletores();

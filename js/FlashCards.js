@@ -12,6 +12,11 @@ export default class FlashCard {
     this.sorteadosArr = []; //os 5 cartões sorteads
     this.vidas = 2;
   }
+
+  atualizaLevelArray() {
+    this.levelArr = jouYou[this.optionLevel];
+  }
+
   getRandom(max) {
     return Math.floor(max * Math.random());
   }
@@ -35,6 +40,11 @@ export default class FlashCard {
     this.mainCard = sorteados[random];
 
     this.sorteadosArr = sorteados;
+  }
+  resetFlashcards() {
+    this.erros = 0;
+    this.acertos = 0;
+    this.vidas = this.rodadas / 5;
   }
 }
 
