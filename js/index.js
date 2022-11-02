@@ -1,28 +1,28 @@
-import FlashCard from "./FlashCards.js";
-import RenderHTML from "./RenderHTML.js";
+import FlashCard from './FlashCards.js';
+import RenderHTML from './RenderHTML.js';
 
-const jogo = document.getElementById("jogo");
-const navBar = document.getElementById("navId");
-const kanji = document.getElementById("kanji");
-const formulario = document.getElementById("formulario");
-const reinicio = document.getElementById("reinicio");
-const speaker = document.getElementById("speaker");
+const jogo = document.getElementById('jogo');
+const navBar = document.getElementById('navId');
+const kanji = document.getElementById('kanji');
+const formulario = document.getElementById('formulario');
+const reinicio = document.getElementById('reinicio');
+const speaker = document.getElementById('speaker');
 
 const game = new FlashCard();
 const render = new RenderHTML(game, jogo);
 
-reinicio.addEventListener("click", () => {
-  jogo.classList.toggle("d-none");
-  navBar.classList.toggle("d-none");
+reinicio.addEventListener('click', () => {
+  jogo.classList.toggle('d-none');
+  navBar.classList.toggle('d-none');
 });
 
-speaker.addEventListener("click", () => {
+speaker.addEventListener('click', () => {
   const utter = new SpeechSynthesisUtterance(kanji.textContent);
-  utter.lang = "ja-JP";
+  utter.lang = 'ja-JP';
   speechSynthesis.speak(utter);
 });
 
-formulario.addEventListener("submit", (event) => {
+formulario.addEventListener('submit', (event) => {
   event.preventDefault();
   event.stopImmediatePropagation();
 
@@ -33,21 +33,21 @@ formulario.addEventListener("submit", (event) => {
 
   render.init(); // inicia o jogo
 
-  navBar.classList.toggle("animate__backOutRight", true);
+  navBar.classList.toggle('animate__backOutRight', true);
   navBar.addEventListener(
-    "animationend",
+    'animationend',
     () => {
-      navBar.classList.toggle("d-none", true); // remove o formulário
-      navBar.classList.toggle("animate__backOutRight");
+      navBar.classList.toggle('d-none', true); // remove o formulário
+      navBar.classList.toggle('animate__backOutRight');
     },
     { once: true }
   );
 
-  jogo.classList.toggle("d-none"); // mostra o jogo
-  jogo.classList.toggle("animate__fadeInLeft", true);
+  jogo.classList.toggle('d-none'); // mostra o jogo
+  jogo.classList.toggle('animate__fadeInLeft', true);
   jogo.addEventListener(
-    "animationend",
-    () => jogo.classList.toggle("animate__fadeInLeft"),
+    'animationend',
+    () => jogo.classList.toggle('animate__fadeInLeft'),
     { once: true }
   );
 });

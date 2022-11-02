@@ -12,44 +12,102 @@ class RenderHTML {
     this.renderPainel();
   }
   renderButtons() {
-    let inner = "";
+    let inner = '';
     for (let i = 0; i < this.game.numCardsPorSet; i++) {
-      inner +=
-        '<div class="col-5 mx-auto mb-3 p-3 btn rounded shadow text-bg-light animate__animated"></div>';
+      inner += `<div id="btn${i}" class="col-5 mx-auto mb-3 p-3 btn rounded shadow text-bg-light animate__animated"></div>`;
     }
-    this.section.querySelector("#deck").innerHTML = inner;
+    let deck = this.section.querySelector('#deck');
+    deck.innerHTML = inner;
+    let listener = (evento) => {
+      //
+      let btn = evento.target.closest('#deck .btn');
+      if (btn == null) return;
+      if (
+        this.game.acertos + this.game.erros >= this.game.rodadas ||
+        this.game.erros >= this.game.vidas
+      ) {
+        this.renderNext(true);
+        console.table({
+          acertos: this.game.acertos,
+          erros: this.game.erros,
+          rodadas: this.game.rodadas,
+          vidas: this.game.vidas,
+        });
+
+        return;
+      }
+      let idClicado = +btn.id.slice(3);
+
+      if (this.game.mainCard === this.game.sorteadosArr[idClicado]) {
+        this.game.acertos++;
+        btn.classList.add('animate__bounce');
+      } else {
+        this.game.erros++;
+        btn.classList.add('animate__shakeX');
+      }
+      this.renderPainel();
+
+      // ANIMAÇÃO PARA MOSTRAR SE ACERTOU OU ERROU
+      btn.addEventListener(
+        'animationend',
+        (event) => {
+          event.stopImmediatePropagation();
+
+          btn.classList.remove('animate__shakeX', 'animate__bounce');
+
+          deck.classList.toggle('animate__zoomIn', true);
+          deck.addEventListener(
+            'animationend',
+            (event) => {
+              event.stopImmediatePropagation();
+
+              deck.classList.toggle('animate__zoomIn');
+            },
+            { once: true }
+          );
+
+          this.renderNext();
+        },
+        { once: true }
+      );
+      //
+    };
+    deck.addEventListener('click', listener);
   }
 
   clearButton() {
-    let btns = this.section.querySelectorAll("#deck > div");
+    let btns = this.section.querySelectorAll('#deck > div');
     btns.forEach((btn, index) => {
-      btn.removeEventListener("click", this.listeners[index]);
+      btn.removeEventListener('click', this.listeners[index]);
     });
     this.listeners = [];
   }
 
   renderDeck() {
-    const ideograma = this.section.querySelector("#kanji");
-    const deck = this.section.querySelector("#deck");
+    const ideograma = this.section.querySelector('#kanji');
+    const deck = this.section.querySelector('#deck');
+
+    // teste escutar o pai - deck
+
     // Mostra o Ideograma
     ideograma.textContent = this.game.mainCard.kanji;
 
-    let btns = this.section.querySelectorAll("#deck > div");
+    let btns = this.section.querySelectorAll('#deck > div');
 
-    this.clearButton();
+    //this.clearButton();
 
     //console.table(this.game.sorteadosArr);
 
     this.game.sorteadosArr.forEach((card, index) => {
       let cartao = btns[index];
 
-      let meaningSpan = "";
+      let meaningSpan = '';
 
       card.meanings.forEach(
         (meaning) => (meaningSpan += `<li class="meaning">${meaning}</li>`)
       );
 
-      let readingSpan = "";
+      let readingSpan = '';
       card.readings_kun.forEach(
         (reading) =>
           (readingSpan += `<li class="reading text-muted">${reading}</li>`)
@@ -69,32 +127,35 @@ class RenderHTML {
             ${readingSpan}
           </ul>
         </div>`;
+      //
 
-      let listener = () => {
+      //
+
+      /* let listener = () => {
         if (card === this.game.mainCard) {
           this.game.acertos++;
-          cartao.classList.add("animate__bounce");
+          cartao.classList.add('animate__bounce');
         } else {
           this.game.erros++;
-          cartao.classList.add("animate__shakeX");
+          cartao.classList.add('animate__shakeX');
         }
         this.renderPainel();
 
         // ANIMAÇÃO PARA MOSTRAR SE ACERTOU OU ERROU
         cartao.addEventListener(
-          "animationend",
+          'animationend',
           (event) => {
             event.stopImmediatePropagation();
 
-            cartao.classList.remove("animate__shakeX", "animate__bounce");
+            cartao.classList.remove('animate__shakeX', 'animate__bounce');
 
-            deck.classList.toggle("animate__zoomIn", true);
+            deck.classList.toggle('animate__zoomIn', true);
             deck.addEventListener(
-              "animationend",
+              'animationend',
               (event) => {
                 event.stopImmediatePropagation();
 
-                deck.classList.toggle("animate__zoomIn");
+                deck.classList.toggle('animate__zoomIn');
               },
               { once: true }
             );
@@ -103,44 +164,45 @@ class RenderHTML {
           },
           { once: true }
         );
-      };
+      }; */
 
-      this.listeners.push(listener);
+      //this.listeners.push(listener);
 
-      cartao.addEventListener("click", listener, { once: true });
+      //cartao.addEventListener('click', listener, { once: true });
     });
+
+    //
+
+    //
   }
   renderPainel() {
     let { optionLevel, levelArr, acertos, erros, rodadas, vidas } = this.game;
     //
-    document.getElementById("optionLevel").textContent = optionLevel;
-    document.getElementById("numIdeogramas").textContent = levelArr.length;
-    document.getElementById("rodada").textContent = Math.min(
+    document.getElementById('optionLevel').textContent = optionLevel;
+    document.getElementById('numIdeogramas').textContent = levelArr.length;
+    document.getElementById('rodada').textContent = Math.min(
       acertos + erros + 1,
       rodadas
     );
-    document.getElementById("rodadas").textContent = rodadas;
+    document.getElementById('rodadas').textContent = rodadas;
     // document.getElementById("acertos").textContent = acertos;
-    document.getElementById("vidas").textContent =
-      "❤".repeat(vidas - erros) + "🖤".repeat(erros);
+    document.getElementById('vidas').textContent =
+      '❤'.repeat(vidas - erros) + '🖤'.repeat(erros);
     //
   }
-  renderNext() {
-    if (
-      this.game.acertos + this.game.erros < this.game.rodadas &&
-      this.game.erros < this.game.vidas
-    ) {
+  renderNext(finished = false) {
+    if (!finished) {
       this.game.randomDeck();
       this.renderDeck();
     } else {
       //<------------resultado final---------
-      this.clearButton();
-      document.getElementById("resultado").textContent = `vc ${
+
+      document.getElementById('resultado').textContent = `vc ${
         this.game.vidas - this.game.erros === 0
-          ? "perdeu, estude mais"
-          : "venceu!"
+          ? 'perdeu, estude mais'
+          : 'venceu!'
       }`;
-      new bootstrap.Modal(document.getElementById("staticBackdrop")).show();
+      new bootstrap.Modal(document.getElementById('staticBackdrop')).show();
     }
   }
 }
