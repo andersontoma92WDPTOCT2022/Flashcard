@@ -15,7 +15,7 @@ class RenderHTML {
     let inner = "";
     for (let i = 0; i < this.game.numCardsPorSet; i++) {
       inner +=
-        '<div class="col-5 mx-auto mb-3 p-3 btn rounded shadow text-bg-light"></div>';
+        '<div class="col-5 mx-auto mb-3 p-3 btn rounded shadow text-bg-light animate__animated"></div>';
     }
     this.section.querySelector("#deck").innerHTML = inner;
   }
@@ -29,8 +29,10 @@ class RenderHTML {
   }
 
   renderDeck() {
+    const ideograma = this.section.querySelector("#kanji");
+    const deck = this.section.querySelector("#deck");
     // Mostra o Ideograma
-    this.section.querySelector("#kanji").textContent = this.game.mainCard.kanji;
+    ideograma.textContent = this.game.mainCard.kanji;
 
     let btns = this.section.querySelectorAll("#deck > div");
 
@@ -71,17 +73,41 @@ class RenderHTML {
       let listener = () => {
         if (card === this.game.mainCard) {
           this.game.acertos++;
+          cartao.classList.add("animate__bounce");
         } else {
           this.game.erros++;
+          cartao.classList.add("animate__shakeX");
         }
         this.renderPainel();
-        // INSERIR PAUSA PARA MOSTRAR SE ACERTOU OU ERROU
-        this.renderNext();
+
+        // ANIMAÇÃO PARA MOSTRAR SE ACERTOU OU ERROU
+        cartao.addEventListener(
+          "animationend",
+          (event) => {
+            event.stopImmediatePropagation();
+
+            cartao.classList.remove("animate__shakeX", "animate__bounce");
+
+            deck.classList.toggle("animate__zoomIn", true);
+            deck.addEventListener(
+              "animationend",
+              (event) => {
+                event.stopImmediatePropagation();
+
+                deck.classList.toggle("animate__zoomIn");
+              },
+              { once: true }
+            );
+
+            this.renderNext();
+          },
+          { once: true }
+        );
       };
 
       this.listeners.push(listener);
 
-      cartao.addEventListener("click", listener);
+      cartao.addEventListener("click", listener, { once: true });
     });
   }
   renderPainel() {
@@ -100,7 +126,6 @@ class RenderHTML {
     //
   }
   renderNext() {
-    console.log(this.game.acertos + this.game.erros + 1 < this.game.rodadas);
     if (
       this.game.acertos + this.game.erros < this.game.rodadas &&
       this.game.erros < this.game.vidas

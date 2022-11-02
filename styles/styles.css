@@ -1,5 +1,7 @@
+@import url("https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css");
+
 html {
-  --bg-img: url(../assets/Mt.\ Fuji.jpg) no-repeat fixed 100% 100%;
+  --bg-img: url("../assets/background.jpg") no-repeat fixed 100% 100%;
 }
 
 .glassy {
@@ -25,12 +27,13 @@ html {
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
 }
 
-body {
+/* body {
   background: var(--bg-img);
-}
+} */
 
 #formulario {
   max-width: 600px;
+  z-index: 1;
 }
 
 #jogo > div {
@@ -72,14 +75,15 @@ body {
   filter: brightness(0.96);
 }
 
-[lang] {
+[lang="en"] {
   hyphens: auto;
 }
 
-#deck ul {
+/* #deck ul {
   flex: 1;
 }
-/* #deck {
+
+#deck {
   display: flex;
   border-width: 2px;
   gap: 10px;

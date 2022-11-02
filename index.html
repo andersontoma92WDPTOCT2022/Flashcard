@@ -17,11 +17,11 @@
       crossorigin="anonymous" />
     <link rel="stylesheet" href="styles\styles.css" />
   </head>
-  <body class="min-vh-100 d-flex">
+  <body class="min-vh-100 d-flex bg overflow-hidden">
     <!-- formulário -->
     <nav
       id="navId"
-      class="d-flex flex-grow-1 align-items-center justify-content-center">
+      class="d-flex flex-grow-1 align-items-center justify-content-center animate__animated">
       <form
         id="formulario"
         action="#"
@@ -48,12 +48,12 @@
           </div>
         </div>
         <!--  botão tart  -->
-        <div class="row p-0 m-0">
-          <button type="button" id="guide" class="col btn text-bg-warning">
-            Guia
-          </button>
-          <button type="submit" id="startBtn" class="col btn btn-primary">
+        <div class="d-grid gap-2">
+          <button type="submit" id="startBtn" class="btn btn-primary">
             Start
+          </button>
+          <button type="button" id="guide" class="btn text-bg-warning">
+            Guia
           </button>
         </div>
       </form>
@@ -62,7 +62,7 @@
     <!-- Jogo -->
     <div
       id="jogo"
-      class="container d-flex justify-content-center align-items-center d-none">
+      class="container d-flex justify-content-center align-items-center animate__animated animate__delay-1s d-none">
       <div class="card">
         <!-- painel -->
         <div id="painel" class="card-header">
@@ -78,8 +78,10 @@
           </div>
         </div>
         <!--  flashcards  -->
-        <section id="flashcards" class="card-body d-flex align-items-center bg">
-          <div id="deck" class="position-relative row gap-3 my-4"></div>
+        <section id="flashcards" class="card-body d-flex align-items-center">
+          <div
+            id="deck"
+            class="position-relative row gap-3 my-4 animate__animated"></div>
         </section>
 
         <div class="card-footer text-muted">

@@ -33,8 +33,23 @@ formulario.addEventListener("submit", (event) => {
 
   render.init(); // inicia o jogo
 
-  navBar.classList.toggle("d-none", true); // remove o formulário
+  navBar.classList.toggle("animate__backOutRight", true);
+  navBar.addEventListener(
+    "animationend",
+    () => {
+      navBar.classList.toggle("d-none", true); // remove o formulário
+      navBar.classList.toggle("animate__backOutRight");
+    },
+    { once: true }
+  );
+
   jogo.classList.toggle("d-none"); // mostra o jogo
+  jogo.classList.toggle("animate__fadeInLeft", true);
+  jogo.addEventListener(
+    "animationend",
+    () => jogo.classList.toggle("animate__fadeInLeft"),
+    { once: true }
+  );
 });
 
 /* (function (level, rodadas) {
