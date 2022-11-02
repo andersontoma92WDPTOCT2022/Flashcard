@@ -14,13 +14,14 @@ class RenderHTML {
   renderButtons() {
     let inner = "";
     for (let i = 0; i < this.game.numCardsPorSet; i++) {
-      inner += "<button></button>";
+      inner +=
+        '<div class="col-5 mx-auto mb-3 p-3 btn rounded shadow text-bg-light"></div>';
     }
     this.section.querySelector("#deck").innerHTML = inner;
   }
 
   clearButton() {
-    let btns = this.section.querySelectorAll("#deck button");
+    let btns = this.section.querySelectorAll("#deck > div");
     btns.forEach((btn, index) => {
       btn.removeEventListener("click", this.listeners[index]);
     });
@@ -31,7 +32,7 @@ class RenderHTML {
     // Mostra o Ideograma
     this.section.querySelector("#kanji").textContent = this.game.mainCard.kanji;
 
-    let btns = this.section.querySelectorAll("#deck button");
+    let btns = this.section.querySelectorAll("#deck > div");
 
     this.clearButton();
 
@@ -43,15 +44,29 @@ class RenderHTML {
       let meaningSpan = "";
 
       card.meanings.forEach(
-        (meaning) => (meaningSpan += `<span class="meaning">${meaning}</span>`)
+        (meaning) => (meaningSpan += `<li class="meaning">${meaning}</li>`)
       );
 
       let readingSpan = "";
       card.readings_kun.forEach(
-        (reading) => (readingSpan += `<span class="reading">${reading}</span>`)
+        (reading) =>
+          (readingSpan += `<li class="reading text-muted">${reading}</li>`)
       );
 
-      cartao.innerHTML = `<div>${meaningSpan}</div><div>${readingSpan}</div>`;
+      cartao.innerHTML = `
+        <div class="row row-cols-2" lang="en">
+          <span>Meaning </span>
+          <span>Kun reading </span>
+        </div>
+        <hr>
+        <div class="row row-cols-2">
+          <ul class="list-unstyled" lang="en">
+            ${meaningSpan}
+          </ul>
+          <ul class="list-unstyled">
+            ${readingSpan}
+          </ul>
+        </div>`;
 
       let listener = () => {
         if (card === this.game.mainCard) {
@@ -79,7 +94,7 @@ class RenderHTML {
       rodadas
     );
     document.getElementById("rodadas").textContent = rodadas;
-    document.getElementById("acertos").textContent = acertos;
+    // document.getElementById("acertos").textContent = acertos;
     document.getElementById("vidas").textContent =
       "❤".repeat(vidas - erros) + "🖤".repeat(erros);
     //

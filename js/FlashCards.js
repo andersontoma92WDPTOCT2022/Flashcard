@@ -26,6 +26,7 @@ export default class FlashCard {
   getRandom(max) {
     return Math.floor(max * Math.random());
   }
+
   randomDeck() {
     // conjunto de 5 kanji's aleatorios de 1 rodada
     let sorteados = [];
@@ -52,31 +53,9 @@ export default class FlashCard {
     this.sorteadosArr = sorteados;
     //console.log(sorteados);
   }
+
   resetFlashcards() {
     this.erros = 0;
     this.acertos = 0;
-    this.vidas = this.rodadas / 5;
   }
 }
-
-/*
-    let card = {
-      "kanji": "入",
-      "meanings": ["Enter", "Insert"],
-      "readings_on": ["にゅう", "じゅ"],
-      "readings_kun": [
-        "い.る",
-        "-い.る",
-        "-い.り",
-        "い.れる",
-        "-い.れ",
-        "はい.る"
-      ]
-    };
-
-    
-
-    elemento[1].meanings
-      .slice(0, Math.min(2, elemento[1].meanings.length))
-      .join(', '),
-*/

@@ -1,9 +1,85 @@
-/* body {
-  background: url("../assets/Mt.\ Fuji.jpg");
-  object-fit: scale-down;
-} */
+html {
+  --bg-img: url(../assets/Mt.\ Fuji.jpg) no-repeat fixed 100% 100%;
+}
 
-#deck {
+.glassy {
+  /* From https://css.glass */
+  background: rgba(255, 255, 255, 0.36);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(9.7px);
+}
+
+.bg {
+  position: relative;
+}
+
+.bg::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--bg-img);
+  filter: blur(3.6px) opacity(0.76);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+}
+
+body {
+  background: var(--bg-img);
+}
+
+#formulario {
+  max-width: 600px;
+}
+
+#jogo > div {
+  min-height: 480px;
+}
+
+#flashcards {
+  max-width: 720px;
+}
+
+#main-card {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  transform: translateX(-50%);
+  z-index: 1;
+  text-align: center;
+}
+
+#main-card:hover #speaker {
+  visibility: visible;
+  transform: rotateX(0deg) !important;
+}
+
+#speaker {
+  visibility: hidden;
+  cursor: pointer;
+  user-select: none;
+
+  border-top: none;
+  margin-top: -10px;
+  transform: rotateX(-90deg);
+  transform-origin: top;
+  transition: all 0.5s;
+  background: whitesmoke;
+}
+
+#deck div:hover {
+  filter: brightness(0.96);
+}
+
+[lang] {
+  hyphens: auto;
+}
+
+#deck ul {
+  flex: 1;
+}
+/* #deck {
   display: flex;
   border-width: 2px;
   gap: 10px;
@@ -24,15 +100,15 @@
   justify-content: space-evenly;
   padding: 5px 5px;
   border-radius: 10px;
-}
+} */
 
-#main-card {
+/* #main-card {
   font-family: "Noto Serif JP", serif;
   font-size: 4rem;
   color: blue;
   text-align: center;
-}
-section {
+} */
+/* section {
   border-radius: 50px;
   background: #e0e0e0;
   box-shadow: -20px -20px 60px #707070, 20px 20px 60px #ffffff;
@@ -41,4 +117,4 @@ section {
 
 footer {
   margin: 20px 10px;
-}
+} */

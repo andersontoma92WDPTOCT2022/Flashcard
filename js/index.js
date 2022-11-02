@@ -1,37 +1,23 @@
 import FlashCard from "./FlashCards.js";
 import RenderHTML from "./RenderHTML.js";
 
-let incia = document.getElementById("startBtn");
-const flashcards = document.getElementById("flashcards");
+const jogo = document.getElementById("jogo");
 const navBar = document.getElementById("navId");
-const painel = document.getElementById("painel");
+const kanji = document.getElementById("kanji");
+const formulario = document.getElementById("formulario");
+const reinicio = document.getElementById("reinicio");
 const speaker = document.getElementById("speaker");
-const formulario = document.getElementById("valores");
 
 const game = new FlashCard();
-const render = new RenderHTML(game, flashcards);
-
-const reinicio = document.getElementById("reinicio");
-
-// botão incializa
-/*
-incia.addEventListener("click", () => {
-  render.init();
-
-});
-*/
+const render = new RenderHTML(game, jogo);
 
 reinicio.addEventListener("click", () => {
-  //
-  flashcards.classList.toggle("d-none");
+  jogo.classList.toggle("d-none");
   navBar.classList.toggle("d-none");
-  painel.classList.toggle("d-none");
 });
-// proximo set - botão
 
-speaker.addEventListener("click", (event) => {
-  let kanji = event.target.previousElementSibling.textContent;
-  const utter = new SpeechSynthesisUtterance(kanji);
+speaker.addEventListener("click", () => {
+  const utter = new SpeechSynthesisUtterance(kanji.textContent);
   utter.lang = "ja-JP";
   speechSynthesis.speak(utter);
 });
@@ -40,17 +26,29 @@ formulario.addEventListener("submit", (event) => {
   event.preventDefault();
   event.stopImmediatePropagation();
 
+  // obtém inputs do formulário
   const data = Object.fromEntries(new FormData(formulario).entries());
   game.setRodadas(Number(data.rodadas));
   game.setLevel(data.level);
 
-  render.init();
+  render.init(); // inicia o jogo
 
-  flashcards.classList.toggle("d-none", false);
-  navBar.classList.toggle("d-none", true);
-  painel.classList.toggle("d-none", false);
+  navBar.classList.toggle("d-none", true); // remove o formulário
+  jogo.classList.toggle("d-none"); // mostra o jogo
 });
 
-// render.botoesSeletores();
+/* (function (level, rodadas) {
+  let data = { level, rodadas };
+  game.setRodadas(Number(data.rodadas));
+  game.setLevel(data.level);
 
-//
+  // inicia o jogo
+  render.init();
+
+  // remove o formulário
+  navBar.classList.toggle("d-none", true);
+
+  // mostra o jogo e o painel
+  flashcards.classList.toggle("d-none", false);
+  painel.classList.toggle("d-none", false);
+})(1, 10); */

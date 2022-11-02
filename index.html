@@ -17,14 +17,19 @@
       crossorigin="anonymous" />
     <link rel="stylesheet" href="styles\styles.css" />
   </head>
-  <body>
+  <body class="min-vh-100 d-flex">
+    <!-- formulário -->
     <nav
       id="navId"
-      class="min-vh-100 d-flex align-items-center justify-content-center">
-      <form id="valores" action="#" method="post" class="container">
+      class="d-flex flex-grow-1 align-items-center justify-content-center">
+      <form
+        id="formulario"
+        action="#"
+        method="post"
+        class="container p-3 rounded bg-white">
         <div class="row mb-3 g-3">
           <div class="col-6">
-            <select name="level" class="col-12 form-select">
+            <select name="level" class="form-select">
               <option value="1">Level 1</option>
               <option value="2">Level 2</option>
               <option value="3">Level 3</option>
@@ -35,7 +40,7 @@
           </div>
           <!--  quantidade de rodadas  -->
           <div class="col-6">
-            <select name="rodadas" class="col-12 form-select">
+            <select name="rodadas" class="form-select">
               <option value="10">10 rodadas</option>
               <option value="15">15 rodadas</option>
               <option value="20">20 rodadas</option>
@@ -44,30 +49,45 @@
         </div>
         <!--  botão tart  -->
         <div class="row p-0 m-0">
-          <button id="startBtn" class="btn btn-primary">Start</button>
+          <button id="guide" class="col btn text-bg-warning">Guia</button>
+          <button id="startBtn" class="col btn btn-primary">Start</button>
         </div>
       </form>
     </nav>
-    <nav id="painel" class="navbar d-none">
-      <h2>
-        Nível atual: <span id="optionLevel"></span> / contém
-        <span id="numIdeogramas"></span> ideogramas
-      </h2>
-      <h2>Rodada: <span id="rodada"></span> de <span id="rodadas"></span></h2>
-      <h2>
-        Acertos: <span id="acertos"></span> Vidas: <span id="vidas"></span>
-      </h2>
-    </nav>
 
-    <!--  flashcards  -->
-    <section id="flashcards" class="d-none">
-      <!-- main Card -->
-      <div id="main-card">
-        <span id="kanji"></span><span id="speaker">🔊</span>
+    <!-- Jogo -->
+    <div
+      id="jogo"
+      class="container d-flex justify-content-center align-items-center d-none">
+      <div class="card">
+        <!-- painel -->
+        <div id="painel" class="card-header">
+          <div class="d-flex justify-content-between">
+            <h5>
+              Rodada: <span id="rodada">1</span> / <span id="rodadas">10</span>
+            </h5>
+            <div id="main-card">
+              <h1 id="kanji" class="p-2 rounded text-bg-warning"></h1>
+              <h6 id="speaker">🔊</h6>
+            </div>
+            <h5>Vidas: <span id="vidas"></span></h5>
+          </div>
+        </div>
+        <!--  flashcards  -->
+        <section id="flashcards" class="card-body d-flex align-items-center bg">
+          <div id="deck" class="position-relative row gap-3 my-4"></div>
+        </section>
+
+        <div class="card-footer text-muted">
+          <div class="d-flex justify-content-between">
+            <h5>Nível selecionado: 0<span id="optionLevel"></span></h5>
+            <h5>Total de ideogramas: <span id="numIdeogramas"></span></h5>
+          </div>
+        </div>
+        <!-- <h5>Acertos: <span id="acertos"></span></h5> -->
       </div>
-      <!-- deck (n cards) -->
-      <div id="deck"></div>
-    </section>
+    </div>
+
     <!-- Modal -->
     <div
       class="modal fade"
