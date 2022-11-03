@@ -25,7 +25,13 @@ speaker.addEventListener("click", () => {
 
 startBtn.addEventListener("click", () => {
   // obtém inputs do formulário
-  const data = Object.fromEntries(new FormData(formulario).entries());
+  const data = Array.from(formulario.querySelectorAll("select")).reduce(
+    (acc, select) => {
+      acc[select.name] = select.value;
+      return acc;
+    },
+    {}
+  );
   game.setRodadas(Number(data.rodadas));
   game.setLevel(data.level);
 
