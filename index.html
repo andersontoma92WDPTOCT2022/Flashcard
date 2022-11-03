@@ -52,7 +52,12 @@
           <button type="submit" id="startBtn" class="btn btn-primary">
             Start
           </button>
-          <button type="button" id="guide" class="btn text-bg-warning">
+          <button
+            type="button"
+            id="guide"
+            class="btn text-bg-warning"
+            data-bs-toggle="modal"
+            data-bs-target="#guideModal">
             Guia
           </button>
         </div>
@@ -137,6 +142,55 @@
       </div>
     </div>
 
+    <div
+      class="modal fade"
+      id="guideModal"
+      data-bs-backdrop="static"
+      data-bs-keyboard="false"
+      tabindex="-1"
+      aria-labelledby="guideLabel"
+      aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="guideLabel">Guia do jogo</h1>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <ol>
+              <li>
+                trata-se de um jogo para treinamento e memorização de ideogramas
+                chineses/japoneses;
+              </li>
+              <li>selecione o nível e quantidade de rodadas;</li>
+              <li>
+                as rodadas são de 10, 15, 20 com 2 ,3 , 4 vidas respectivamente.
+              </li>
+            </ol>
+            <p>
+              O jogo começa apresentando um kanji/ideograma e você deve
+              selecionar a opção de representa seu significado.
+            </p>
+            <footer>
+              fonte dos dados: GitHub - davidluzgouveia/kanji-data: A JSON kanji
+              dataset with updated JLPT levels and WaniKani information
+            </footer>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal">
+              Close
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
     <!--
     <footer>
       <button id="proximoBtn">próximo set</button>
