@@ -1,5 +1,5 @@
-import FlashCard from "./FlashCards.js";
-import RenderHTML from "./RenderHTML.js";
+// import FlashCard from "./FlashCards.js";
+// import RenderHTML from "./RenderHTML.js";
 
 const jogo = document.getElementById("jogo");
 const navBar = document.getElementById("navId");

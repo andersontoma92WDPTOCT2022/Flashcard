@@ -145,4 +145,4 @@ class RenderHTML {
   }
 }
 
-export default RenderHTML;
+// export default RenderHTML;
