@@ -5,6 +5,7 @@ const jogo = document.getElementById("jogo");
 const navBar = document.getElementById("navId");
 const kanji = document.getElementById("kanji");
 const formulario = document.getElementById("formulario");
+const startBtn = document.getElementById("startBtn");
 const reinicio = document.getElementById("reinicio");
 const speaker = document.getElementById("speaker");
 
@@ -22,8 +23,7 @@ speaker.addEventListener("click", () => {
   speechSynthesis.speak(utter);
 });
 
-formulario.addEventListener("submit", (event) => {
-  event.preventDefault();
+startBtn.addEventListener("click", (event) => {
   event.stopImmediatePropagation();
 
   // obtém inputs do formulário
