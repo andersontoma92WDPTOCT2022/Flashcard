@@ -23,9 +23,7 @@ speaker.addEventListener("click", () => {
   speechSynthesis.speak(utter);
 });
 
-startBtn.addEventListener("click", (event) => {
-  event.stopImmediatePropagation();
-
+startBtn.addEventListener("click", () => {
   // obtém inputs do formulário
   const data = Object.fromEntries(new FormData(formulario).entries());
   game.setRodadas(Number(data.rodadas));
