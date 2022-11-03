@@ -24,8 +24,9 @@
       class="d-flex flex-grow-1 align-items-center justify-content-center animate__animated">
       <form
         id="formulario"
-        action=""
+        action="#"
         method="post"
+        onsubmit="return function (event) {event.preventDefault(); return false;}"
         class="container p-3 rounded bg-white">
         <div class="row mb-3 g-3">
           <div class="col-6">
@@ -49,7 +50,7 @@
         </div>
         <!--  botão tart  -->
         <div class="d-grid gap-2">
-          <button type="submit" id="startBtn" class="btn btn-primary">
+          <button type="button" id="startBtn" class="btn btn-primary">
             Start
           </button>
           <button
