@@ -55,19 +55,3 @@ startBtn.addEventListener("click", () => {
     { once: true }
   );
 });
-
-/* (function (level, rodadas) {
-  let data = { level, rodadas };
-  game.setRodadas(Number(data.rodadas));
-  game.setLevel(data.level);
-
-  // inicia o jogo
-  render.init();
-
-  // remove o formulário
-  navBar.classList.toggle("d-none", true);
-
-  // mostra o jogo e o painel
-  flashcards.classList.toggle("d-none", false);
-  painel.classList.toggle("d-none", false);
-})(1, 10); */
